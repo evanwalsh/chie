@@ -1,7 +1,7 @@
 {
-  "name": "node-boilerplate",
+  "name": "chie",
   "version": "1.0.0",
-  "description": "Project Description",
+  "description": "Make ebooks",
   "main": "build/main.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack --config webpack.config.js",
