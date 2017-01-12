@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "description": "Make ebooks",
   "main": "build/main.js",
-  "scripts": {
-    "build": "./node_modules/.bin/webpack --config webpack.config.js",
-    "watch": "npm run build -- -w",
-    "flow": "./node_modules/.bin/flow",
-    "style": "./node_modules/.bin/standard-flow src/** webpack.config.js",
-    "lint": "npm run flow; npm run style"
-  },
   "author": "Evan Walsh <evan@massivedanger.com>",
   "license": "MIT",
   "repository": {
@@ -29,5 +22,7 @@
     "standard-flow": "^1.0.0",
     "webpack": "2.1.0-beta.27"
   },
-  "dependencies": {}
+  "dependencies": {
+    "marked": "^0.3.6"
+  }
 }
