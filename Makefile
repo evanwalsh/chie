@@ -1,18 +1,23 @@
+BIN_DIR=./node_modules/.bin
+
 all:
-	./node_modules/.bin/webpack --config webpack.config.js
+	$(BIN_DIR)/webpack --config webpack.config.js
 
 install: all
 	npm link
 
 watch:
-	./node_modules/.bin/webpack --config webpack.config.js -w
+	$(BIN_DIR)/webpack --config webpack.config.js -w
 
 flow:
-	./node_modules/.bin/flow src/**
+	$(BIN_DIR)/flow check src
 
 style:
-	./node_modules/.bin/standard-flow src/** webpack.config.js
+	$(BIN_DIR)/standard src/** test/** webpack.config.js | $(BIN_DIR)/snazzy
 
 lint: flow style
 
-.PHONY: watch flow style lint
+test:
+	$(BIN_DIR)/babel-node test/**.js | $(BIN_DIR)/faucet
+
+.PHONY: watch flow style lint test
