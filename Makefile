@@ -18,6 +18,6 @@ style:
 lint: flow style
 
 test:
-	$(BIN_DIR)/babel-node test/**.js | $(BIN_DIR)/faucet
+	$(BIN_DIR)/tape -r babel-register -r ./test/helper.js test/**_test.js | $(BIN_DIR)/faucet
 
 .PHONY: watch flow style lint test
