@@ -25,17 +25,40 @@ export default class Book {
     await this.parse()
 
     const layoutPath = path.join(__dirname, 'templates', 'layout.html')
+    const stylesPath = path.join(__dirname, 'templates', 'book.css')
     const layout = fs.readFileSync(layoutPath, 'utf8')
+    const styles = fs.readFileSync(stylesPath, 'utf8')
     const {config} = this
 
     this.html = nunjucks.renderString(layout, {
       ...config,
-      content: this.parsedSource
+      content: this.parsedSource,
+      styles
     })
   }
 
-  async write () {
-    
+  async write (directory: string) {
+    if (!this.html) {
+      await this.build()
+    }
+
+    if (!directory) {
+      directory = this.config.output
+    }
+
+    const filename = path.join(directory, 'book.html')
+
+    console.log(filename)
+
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filename, this.html, (err) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(filename)
+        }
+      })
+    })
   }
 
   async parse () {
